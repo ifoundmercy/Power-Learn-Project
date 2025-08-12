@@ -1,0 +1,58 @@
+# This program implements a basic calculator that performs addition, subtraction,
+# multiplication, and division based on user input.
+
+def basic_calculator():
+    """
+    Performs a basic arithmetic operation based on user input.
+    """
+    print("Welcome to the Basic Calculator Program!")
+
+    while True:
+        try:
+            # Get the first number from the user
+            num1 = float(input("Enter the first number: "))
+            break # Exit loop if input is valid
+        except ValueError:
+            # Handle non-numeric input for the first number
+            print("Invalid input. Please enter a valid number.")
+
+    while True:
+        try:
+            # Get the second number from the user
+            num2 = float(input("Enter the second number: "))
+            break # Exit loop if input is valid
+        except ValueError:
+            # Handle non-numeric input for the second number
+            print("Invalid input. Please enter a valid number.")
+
+    while True:
+        # Get the operation from the user
+        operation = input("Enter the operation (+, -, *, /): ")
+
+        # Perform the calculation based on the chosen operation
+        if operation == '+':
+            result = num1 + num2
+            print(f"{num1} + {num2} = {result}")
+            break
+        elif operation == '-':
+            result = num1 - num2
+            print(f"{num1} - {num2} = {result}")
+            break
+        elif operation == '*':
+            result = num1 * num2
+            print(f"{num1} * {num2} = {result}")
+            break
+        elif operation == '/':
+            # Handle division by zero error
+            if num2 == 0:
+                print("Error: Division by zero is not allowed.")
+            else:
+                result = num1 / num2
+                print(f"{num1} / {num2} = {result}")
+                break
+        else:
+            # Handle invalid operation input
+            print("Invalid operation. Please choose from +, -, *, or /.")
+
+# Call the function to run the calculator
+basic_calculator()
