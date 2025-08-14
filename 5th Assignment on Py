@@ -1,0 +1,136 @@
+# --- Class Representation: Vehicle Hierarchy ---
+
+class Vehicle:
+    """
+    A base class to represent a generic vehicle.
+    It includes attributes common to all vehicles and a basic move method.
+    """
+    def __init__(self, make, model, year):
+        """
+        Constructor to initialize a Vehicle object.
+
+        Args:
+            make (str): The manufacturer of the vehicle.
+            model (str): The specific model name of the vehicle.
+            year (int): The manufacturing year of the vehicle.
+        """
+        self.make = make
+        self.model = model
+        self.year = year
+        print(f"A new Vehicle object '{self.make} {self.model}' has been created.")
+
+    def move(self):
+        """
+        Defines the generic movement action for a vehicle.
+        This method will be overridden by subclasses to provide specific behaviors.
+        """
+        print(f"The {self.make} {self.model} is moving.")
+
+    def display_info(self):
+        """
+        Displays basic information about the vehicle.
+        """
+        print(f"--- {self.make} {self.model} ({self.year}) ---")
+
+
+class Car(Vehicle):
+    """
+    A subclass representing a Car, inheriting from Vehicle.
+    It adds car-specific attributes and overrides the move method.
+    """
+    def __init__(self, make, model, year, num_doors):
+        """
+        Constructor to initialize a Car object. Calls the parent (Vehicle) constructor.
+
+        Args:
+            make (str): The manufacturer of the car.
+            model (str): The specific model name of the car.
+            year (int): The manufacturing year of the car.
+            num_doors (int): The number of doors the car has.
+        """
+        super().__init__(make, model, year) # Call the constructor of the parent class (Vehicle)
+        self.num_doors = num_doors
+        print(f"A new Car object '{self.make} {self.model}' has been created with {self.num_doors} doors.")
+
+    def move(self):
+        """
+        Overrides the move method for a Car.
+        Demonstrates polymorphism: same method name, different implementation.
+        """
+        print(f"The {self.make} {self.model} is Driving 🚗.")
+
+    def display_info(self):
+        """
+        Displays information specific to the car, extending Vehicle's info.
+        """
+        super().display_info() # Call the parent's display_info method
+        print(f"Type: Car")
+        print(f"Number of doors: {self.num_doors}")
+
+
+class Plane(Vehicle):
+    """
+    A subclass representing a Plane, inheriting from Vehicle.
+    It adds plane-specific attributes and overrides the move method.
+    """
+    def __init__(self, make, model, year, max_altitude_feet):
+        """
+        Constructor to initialize a Plane object. Calls the parent (Vehicle) constructor.
+
+        Args:
+            make (str): The manufacturer of the plane.
+            model (str): The specific model name of the plane.
+            year (int): The manufacturing year of the plane.
+            max_altitude_feet (int): The maximum altitude the plane can reach in feet.
+        """
+        super().__init__(make, model, year) # Call the constructor of the parent class (Vehicle)
+        self.max_altitude_feet = max_altitude_feet
+        print(f"A new Plane object '{self.make} {self.model}' has been created with a max altitude of {self.max_altitude_feet} feet.")
+
+    def move(self):
+        """
+        Overrides the move method for a Plane.
+        Demonstrates polymorphism: same method name, different implementation.
+        """
+        print(f"The {self.make} {self.model} is Flying ✈️ at an altitude of {self.max_altitude_feet} feet!")
+
+    def display_info(self):
+        """
+        Displays information specific to the plane, extending Vehicle's info.
+        """
+        super().display_info() # Call the parent's display_info method
+        print(f"Type: Plane")
+        print(f"Max Altitude: {self.max_altitude_feet} feet")
+
+
+# --- Activity 2: Polymorphism Challenge! 🎭 ---
+
+if __name__ == "__main__":
+    print("\n--- Demonstrating Object Creation and Methods ---")
+
+    # Create instances of Car
+    my_car = Car("Toyota", "Camry", 2022, 4)
+    electric_car = Car("Tesla", "Model 3", 2023, 4)
+
+    print("-" * 30)
+
+    # Create instances of Plane
+    jumbo_jet = Plane("Boeing", "747", 1990, 45000)
+    private_jet = Plane("Cessna", "Citation", 2018, 41000)
+
+    print("\n--- Displaying Vehicle Information ---")
+    my_car.display_info()
+    electric_car.display_info()
+    jumbo_jet.display_info()
+    private_jet.display_info()
+
+    print("\n--- Demonstrating Polymorphism with 'move()' method ---")
+
+    # Store different vehicle objects in a list
+    vehicles = [my_car, electric_car, jumbo_jet, private_jet]
+
+    # Iterate through the list and call the 'move()' method on each object.
+    # Notice how the *same* method call (vehicle.move()) behaves differently
+    # depending on the *type* of the object. This is polymorphism.
+    for vehicle in vehicles:
+        vehicle.move()
