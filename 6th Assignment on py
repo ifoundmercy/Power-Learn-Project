@@ -1,0 +1,169 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.datasets import load_iris
+import os # For managing file paths
+
+# --- Configuration for plots ---
+# Set a nicer plotting style using seaborn
+sns.set_style("whitegrid")
+plt.rcParams['figure.figsize'] = (10, 6) # Set default figure size
+plt.rcParams['font.size'] = 12 # Set default font size
+plt.rcParams['axes.labelsize'] = 14 # Set axis label font size
+plt.rcParams['axes.titlesize'] = 16 # Set title font size
+
+# Define the filename for the dataset
+DATASET_FILENAME = 'iris_dataset.csv'
+
+# --- Task 1: Load and Explore the Dataset ---
+print("--- Task 1: Loading and Exploring the Dataset ---")
+
+# Step 1: Load the Iris dataset from sklearn and save it as a CSV
+# This step is done to simulate loading from an external CSV file
+# and demonstrate error handling for file reading.
+try:
+    iris = load_iris()
+    iris_df = pd.DataFrame(data=iris.data, columns=iris.feature_names)
+    iris_df['species'] = iris.target_names[iris.target]
+    iris_df.to_csv(DATASET_FILENAME, index=False)
+    print(f"Iris dataset successfully created and saved as '{DATASET_FILENAME}'.")
+except Exception as e:
+    print(f"Error creating and saving the Iris CSV: {e}")
+    exit() # Exit if we can't even create the file to read from
+
+# Load the dataset using pandas with error handling
+try:
+    df = pd.read_csv(DATASET_FILENAME)
+    print(f"\nDataset '{DATASET_FILENAME}' loaded successfully.")
+except FileNotFoundError:
+    print(f"Error: The file '{DATASET_FILENAME}' was not found. Please ensure it is in the correct directory.")
+    exit() # Exit if the file isn't found
+except pd.errors.EmptyDataError:
+    print(f"Error: The file '{DATASET_FILENAME}' is empty.")
+    exit()
+except pd.errors.ParserError:
+    print(f"Error: Could not parse '{DATASET_FILENAME}'. Check file format.")
+    exit()
+except Exception as e:
+    print(f"An unexpected error occurred while reading the file: {e}")
+    exit()
+
+# Display the first few rows of the dataset
+print("\nFirst 5 rows of the dataset:")
+print(df.head())
+
+# Explore the structure of the dataset
+print("\nDataset Information:")
+df.info()
+
+# Check for any missing values
+print("\nMissing Values per Column:")
+print(df.isnull().sum())
+
+# Clean the dataset by either filling or dropping any missing values.
+# The Iris dataset is typically very clean with no missing values.
+# However, this block demonstrates how you would handle it if there were.
+if df.isnull().sum().sum() > 0:
+    print("\nMissing values detected. Handling them now...")
+    # Option 1: Drop rows with any missing values (uncomment if preferred)
+    # df.dropna(inplace=True)
+    # print("Rows with missing values have been dropped.")
+
+    # Option 2: Fill missing numerical values with the mean (uncomment if preferred)
+    for col in df.select_dtypes(include=['float64', 'int64']).columns:
+        if df[col].isnull().any():
+            df[col].fillna(df[col].mean(), inplace=True)
+            print(f"Missing values in '{col}' filled with mean.")
+    # Option 3: Fill missing categorical values with the mode (uncomment if preferred)
+    for col in df.select_dtypes(include=['object']).columns:
+        if df[col].isnull().any():
+            df[col].fillna(df[col].mode()[0], inplace=True)
+            print(f"Missing values in '{col}' filled with mode.")
+else:
+    print("\nNo missing values found in the dataset. Dataset is clean. ✨")
+
+# --- Task 2: Basic Data Analysis ---
+print("\n" + "="*50)
+print("--- Task 2: Basic Data Analysis ---")
+
+# Compute the basic statistics of the numerical columns
+print("\nDescriptive Statistics of Numerical Columns:")
+print(df.describe())
+
+# Perform groupings on a categorical column (species) and compute the mean of numerical columns for each group.
+print("\nMean of Numerical Features Grouped by Species:")
+grouped_mean = df.groupby('species')[['sepal length (cm)', 'sepal width (cm)', 'petal length (cm)', 'petal width (cm)']].mean()
+print(grouped_mean)
+
+# Identify any patterns or interesting findings from your analysis.
+print("\n--- Findings and Observations ---")
+print("1. The 'describe()' output shows the distribution and central tendency of each feature.")
+print("   - Petal length and width generally have larger standard deviations relative to their means compared to sepal features, suggesting more variability.")
+print("2. Grouping by 'species' reveals distinct differences between the Iris species:")
+print("   - Iris-setosa generally has smaller sepal and petal measurements compared to versicolor and virginica.")
+print("   - Iris-virginica typically has the largest sepal and petal lengths and widths.")
+print("   - Iris-versicolor falls in between setosa and virginica for most measurements.")
+print("3. These distinct differences suggest that 'petal length (cm)' and 'petal width (cm)' are likely strong features for classifying the species.")
+
+# --- Task 3: Data Visualization ---
+print("\n" + "="*50)
+print("--- Task 3: Data Visualization ---")
+
+# 1. Line chart showing trends over time (using index as a proxy for observation order)
+# Since the Iris dataset doesn't have a time-series, we'll plot a feature against its index
+# to show a sequence of observations.
+plt.figure(figsize=(12, 6))
+sns.lineplot(x=df.index, y='sepal length (cm)', data=df, hue='species', errorbar=None)
+plt.title('Sepal Length Trend Across Observations by Species')
+plt.xlabel('Observation Index')
+plt.ylabel('Sepal Length (cm)')
+plt.legend(title='Species')
+plt.grid(True)
+plt.tight_layout()
+plt.show()
+print("1. Line Chart: Shows the `sepal length (cm)` for each observation, separated by species.")
+print("   While not a true time-series, it helps visualize the sequence of measurements and how they vary within and across species. Iris-setosa samples generally have shorter sepal lengths throughout the dataset's ordering.")
+
+# 2. Bar chart showing the comparison of a numerical value across categories
+plt.figure(figsize=(10, 7))
+sns.barplot(x='species', y='petal length (cm)', data=df, errorbar='sd', palette='viridis')
+plt.title('Average Petal Length per Iris Species')
+plt.xlabel('Species')
+plt.ylabel('Average Petal Length (cm)')
+plt.tight_layout()
+plt.show()
+print("\n2. Bar Chart: Compares the average `petal length (cm)` across the three Iris species.")
+print("   This clearly shows that Iris-virginica has the largest average petal length, followed by Iris-versicolor, and then Iris-setosa. The error bars indicate the standard deviation within each species.")
+
+# 3. Histogram of a numerical column to understand its distribution
+plt.figure(figsize=(10, 7))
+sns.histplot(df['sepal width (cm)'], bins=15, kde=True, color='purple')
+plt.title('Distribution of Sepal Width (cm)')
+plt.xlabel('Sepal Width (cm)')
+plt.ylabel('Frequency')
+plt.tight_layout()
+plt.show()
+print("\n3. Histogram: Displays the distribution of `sepal width (cm)`.")
+print("   The distribution appears roughly bell-shaped (normal-like) but with a slight right skew, indicating most sepal widths are concentrated around the mean, with fewer samples having very wide sepals.")
+
+# 4. Scatter plot to visualize the relationship between two numerical columns
+plt.figure(figsize=(10, 7))
+sns.scatterplot(x='sepal length (cm)', y='petal length (cm)', hue='species', data=df, s=100, alpha=0.8, palette='deep')
+plt.title('Relationship between Sepal Length and Petal Length by Species')
+plt.xlabel('Sepal Length (cm)')
+plt.ylabel('Petal Length (cm)')
+plt.legend(title='Species')
+plt.grid(True)
+plt.tight_layout()
+plt.show()
+print("\n4. Scatter Plot: Visualizes the relationship between `sepal length (cm)` and `petal length (cm)`.")
+print("   This plot clearly demonstrates strong clustering by species. Iris-setosa (blue dots) forms a distinct group with shorter sepal and petal lengths. Iris-virginica (red dots) generally has larger measurements for both, while Iris-versicolor (green dots) lies in between. This strong separation is excellent for classification tasks.")
+
+# Clean up the generated CSV file
+try:
+    os.remove(DATASET_FILENAME)
+    print(f"\nCleaned up: Removed the generated '{DATASET_FILENAME}' file.")
+except OSError as e:
+    print(f"Error removing file '{DATASET_FILENAME}': {e}")
+
+print("\n--- End of Analysis ---")
