@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 4 Assignment</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header class="header-container">
+        <h1>Modern Web Layouts</h1>
+        <p>A demonstration of CSS Flexbox and Grid.</p>
+    </header>
+
+    <main>
+        <!-- Flexbox Section -->
+        <section class="flex-section">
+            <h2>The Flexbox Component</h2>
+            <div class="flex-container">
+                <div class="flex-item">
+                    <h3>Flexible Item 1</h3>
+                    <p>Flexbox is ideal for one-dimensional layouts. It's great for aligning items in a row or column, and for distributing space between them.</p>
+                </div>
+                <div class="flex-item">
+                    <h3>Flexible Item 2</h3>
+                    <p>Use Flexbox for navigation bars, single-row galleries, or for centering elements on a page.</p>
+                </div>
+                <div class="flex-item">
+                    <h3>Flexible Item 3</h3>
+                    <p>It automatically wraps items to the next line when space runs out, making it very flexible.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CSS Grid Section -->
+        <section class="grid-section">
+            <h2>The CSS Grid Component</h2>
+            <div class="grid-container">
+                <article class="grid-item">
+                    <h3>Grid Article 1</h3>
+                    <p>CSS Grid is for two-dimensional layouts, helping you create complex structures with rows and columns. It's perfect for a full-page layout.</p>
+                </article>
+                <article class="grid-item">
+                    <h3>Grid Article 2</h3>
+                    <p>Unlike Flexbox, Grid allows you to control the size and position of elements in both the horizontal and vertical directions.</p>
+                </article>
+                <article class="grid-item">
+                    <h3>Grid Article 3</h3>
+                    <p>You can create a responsive grid that automatically adjusts the number of columns based on the screen size using `auto-fit` and `minmax()`.</p>
+                </article>
+                <article class="grid-item">
+                    <h3>Grid Article 4</h3>
+                    <p>This provides a powerful way to handle responsive design without writing extensive media queries for every single layout change.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Web Dev Fundamentals. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
