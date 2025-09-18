@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 7 Web Animations</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>CSS & JavaScript Animations</h1>
+        <p>A demonstration of CSS Transitions, Keyframes, and JavaScript control.</p>
+    </header>
+
+    <main>
+        <!-- Section for CSS Transitions -->
+        <section class="transition-section">
+            <h2>CSS Transitions</h2>
+            <div id="transition-box" class="animation-box">
+                <p>Hover over me!</p>
+            </div>
+            <p class="description">This box changes color smoothly using a CSS `transition` when you hover over it.</p>
+        </section>
+
+        <!-- Section for CSS Keyframe Animations -->
+        <section class="keyframe-section">
+            <h2>CSS Keyframe Animation</h2>
+            <div id="keyframe-box" class="animation-box">
+                <p>I'm an animation.</p>
+            </div>
+            <p class="description">This box uses a CSS `@keyframes` animation to change its size and color continuously.</p>
+        </section>
+        
+        <!-- Section for JavaScript-controlled animation -->
+        <section class="javascript-section">
+            <h2>JavaScript-Triggered Animation</h2>
+            <div id="js-box" class="animation-box">
+                <p>Click me!</p>
+            </div>
+            <button id="trigger-btn">Trigger Animation</button>
+            <p class="description">Click the box or the button to trigger a CSS animation using JavaScript.</p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Week 7 Assignment</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
