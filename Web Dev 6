@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 6 JavaScript Assignment</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Interactive Web Page Demo</h1>
+        <p>This page demonstrates JavaScript event handling, interactive features, and custom form validation.</p>
+    </header>
+
+    <main>
+        <!-- Part 1: Interactive Counter Feature -->
+        <section class="interactive-section">
+            <h2>Live Counter</h2>
+            <div class="counter-container">
+                <span id="counter-value">0</span>
+                <button id="increment-button">Increment</button>
+            </div>
+        </section>
+
+        <!-- Part 2: Password Visibility Feature -->
+        <section class="interactive-section">
+            <h2>Show/Hide Password</h2>
+            <div class="password-container">
+                <input type="password" id="password-input" placeholder="Enter password">
+                <button id="toggle-password">Show</button>
+            </div>
+        </section>
+
+        <!-- Part 3: Custom Form Validation -->
+        <section class="interactive-section">
+            <h2>Contact Form</h2>
+            <p>This form uses custom JavaScript for validation.</p>
+            <form id="contact-form" novalidate>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email-input" name="email" autocomplete="email">
+                    <p class="error-message" id="email-error"></p>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message-input" name="message" rows="5"></textarea>
+                    <p class="error-message" id="message-error"></p>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Week 6 Assignment</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
