@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Dev Fundamentals</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>Web Dev Fundamentals Blog</h1>
+            <p>Your guide to mastering HTML and CSS.</p>
+        </div>
+    </header>
+
+    <main>
+        <section id="introduction-section">
+            <h2>The Basics of the Web</h2>
+            <p>
+                Welcome to our exploration of web development fundamentals. The journey to building beautiful and functional websites begins with two core technologies: HTML and CSS.
+            </p>
+            <p>
+                <strong>HTML</strong> provides the structure of your content, defining elements like headings, paragraphs, and lists. <strong>CSS</strong>, on the other hand, is the language you use to style that content, adding colors, fonts, and layouts.
+            </p>
+        </section>
+
+        <section id="box-model-section">
+            <h2>Understanding the CSS Box Model</h2>
+            <div class="box-model-example">
+                <h3>The Box Model Explained</h3>
+                <p>
+                    Every element on a webpage is a rectangular box. The CSS Box Model describes how these boxes are rendered, allowing you to control their size and spacing.
+                </p>
+                <ul>
+                    <li>**Content:** The actual content of the element, such as text or images.</li>
+                    <li>**Padding:** The space between the content and the border.</li>
+                    <li>**Border:** The line that surrounds the padding and content.</li>
+                    <li>**Margin:** The space outside the border, which separates the element from other elements.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="contact-section">
+            <h2>Get in Touch</h2>
+            <p>
+                Have questions or feedback? Feel free to reach out to us. We'd love to hear from you.
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Web Dev Fundamentals. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
