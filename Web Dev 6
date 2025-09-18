@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 5 JavaScript Assignment</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>JavaScript Fundamentals Demo</h1>
+        <p>This page demonstrates core JavaScript concepts as outlined in the assignment.</p>
+    </header>
+
+    <main>
+        <!-- Part 4: A DOM element to interact with -->
+        <section id="dom-section">
+            <h2>JavaScript in Action</h2>
+            <div class="content-box">
+                <p id="output-message">
+                    Click the button below to see the JavaScript code work!
+                </p>
+                <button id="action-button">Run the Script</button>
+            </div>
+        </section>
+
+        <!-- Part 4: Another DOM element for interaction -->
+        <section class="code-section">
+            <h2>Looping through an Array</h2>
+            <ul id="loop-list">
+                <!-- JavaScript will populate this list -->
+            </ul>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2024 JavaScript Assignment</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
