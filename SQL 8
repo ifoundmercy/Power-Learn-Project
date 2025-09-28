@@ -1,0 +1,39 @@
+-- Create the database
+CREATE DATABASE LibraryDB;
+USE LibraryDB;
+
+-- Table: Authors
+CREATE TABLE Authors (
+    authorID INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    birthDate DATE
+);
+
+-- Table: Books
+CREATE TABLE Books (
+    bookID INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(150) NOT NULL,
+    authorID INT NOT NULL,
+    publishedYear YEAR,
+    isbn VARCHAR(20) UNIQUE,
+    FOREIGN KEY (authorID) REFERENCES Authors(authorID)
+);
+
+-- Table: Members
+CREATE TABLE Members (
+    memberID INT AUTO_INCREMENT PRIMARY KEY,
+    fullName VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    joinDate DATE NOT NULL
+);
+
+-- Table: Loans
+CREATE TABLE Loans (
+    loanID INT AUTO_INCREMENT PRIMARY KEY,
+    bookID INT NOT NULL,
+    memberID INT NOT NULL,
+    loanDate DATE NOT NULL,
+    returnDate DATE,
+    FOREIGN KEY (bookID) REFERENCES Books(bookID),
+    FOREIGN KEY (memberID) REFERENCES Members(memberID)
+);
